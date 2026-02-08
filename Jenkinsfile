@@ -51,6 +51,14 @@ pipeline {
                  }
             }
         }
+        stage('SonarQube') {
+            steps {
+                script {
+                    echo 'sonarqube ile kod analiz et'
+
+                }
+            }
+        }
         /*
         stage('Docker Image') {
             steps {
