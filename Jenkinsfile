@@ -52,11 +52,24 @@ pipeline {
             }
         }
         stage('SonarQube') {
+           
             steps {
-                script {
-                    echo 'sonarqube ile kod analiz et'
+                echo 'SonarQube ile kod analizi yap.'
 
-                }
+                 script {
+                    withSonarQubeEnv(credentialId: 'TOKEN_ID_SONARQUBE') {
+                         if (isUnix()) {
+                            sh "mvn  sonar:sonar"
+                        } else {
+                            bat "mvn  sonar:sonar"
+                        }
+                    }
+                    if (isUnix()) {
+                        sh "mvn  sonar:sonar"
+                    } else {
+                        bat "mvn  sonar:sonar"
+                    }
+                 }
             }
         }
         /*
